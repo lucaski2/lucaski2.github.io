@@ -45,10 +45,59 @@
     }
     .btns {
       display: flex;
-      gap: 14px;
       justify-content: center;
-      flex-wrap: wrap;
       margin-top: 10px;
+    }
+    .form {
+      margin: 28px auto 0;
+      width: min(100%, 560px);
+      display: grid;
+      gap: 16px;
+      text-align: left;
+    }
+    .form label {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .form input,
+    .form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid #d8d8d8;
+      border-radius: 14px;
+      font: inherit;
+      background: white;
+      color: #222;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .form input:focus,
+    .form textarea:focus {
+      border-color: #ff4d88;
+      box-shadow: 0 0 0 4px rgba(255, 77, 136, 0.12);
+    }
+    .form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+      .wrap {
+        padding: 32px 20px;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
     }
     button {
       border: none;
@@ -103,43 +152,47 @@
 
     <form action="https://formspree.io/f/xaqlqbek" method="POST" class="form">
       <input type="hidden" name="_subject" value="New Girlfriend Application" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_template" value="table" />
 
-      <label>
-        Full Name
-        <input type="text" name="Full Name" required />
-      </label>
+      <div class="row">
+        <label>
+          Full Name
+          <input type="text" name="Full Name" required />
+        </label>
 
-      <label>
-        Email
-        <input type="email" name="Email" required />
-      </label>
+        <label>
+          Email
+          <input type="email" name="Email" required />
+        </label>
+      </div>
 
-      <label>
-        Phone Number
-        <input type="text" name="Phone Number" required />
-      </label>
+      <div class="row">
+        <label>
+          Phone Number
+          <input type="text" name="Phone Number" required />
+        </label>
 
-      <label>
-        Age
-        <input type="number" name="Age" min="18" required />
-      </label>
+        <label>
+          Age
+          <input type="number" name="Age" min="18" required />
+        </label>
+      </div>
 
       <label>
         Why are you applying?
         <textarea name="Why are you applying?" rows="4" required></textarea>
       </label>
 
-      <label>
-        Best trait
-        <input type="text" name="Best trait" required />
-      </label>
+      <div class="row">
+        <label>
+          Best trait
+          <input type="text" name="Best trait" required />
+        </label>
 
-      <label>
-        Ideal first date
-        <input type="text" name="Ideal first date" required />
-      </label>
+        <label>
+          Ideal first date
+          <input type="text" name="Ideal first date" required />
+        </label>
+      </div>
 
       <label>
         Final statement
