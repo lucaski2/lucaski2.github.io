@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Direct Proposal</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #ffd6e7, #ffeccf);
+      color: #222;
+      overflow: hidden;
+    }
+    .wrap {
+      width: min(92vw, 720px);
+      background: rgba(255,255,255,0.9);
+      border-radius: 28px;
+      padding: 40px 28px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.14);
+      position: relative;
+      z-index: 2;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.05;
+    }
+    p {
+      font-size: 1.08rem;
+      line-height: 1.6;
+      margin: 0 auto 24px;
+      max-width: 560px;
+    }
+    .heart {
+      font-size: 3rem;
+      margin-bottom: 14px;
+      animation: pulse 1.4s infinite;
+    }
+    .btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    }
+    button:hover { transform: translateY(-2px); }
+    .yes { background: #ff4d88; color: white; }
+    .maybe { background: #ffd65a; color: #222; }
+    .no { background: #efefef; color: #222; position: relative; }
+    .msg {
+      margin-top: 26px;
+      min-height: 56px;
+      font-size: 1.12rem;
+      font-weight: 600;
+    }
+    .tiny {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .floating-heart {
+      position: fixed;
+      font-size: 20px;
+      animation: floatUp 2.4s linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-180px) scale(1.6); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="heart">💖</div>
+    <h1>I’ll be direct.</h1>
+    <p>
+      I have seen your displays of affection, and I see no reason to be vague.<br>
+      I like you. You are kind, funny, and beautiful — precisely my type.<br>
+      We should go out sometime.
+    </p>
+
+    <div class="btns">
+      <button class="yes" onclick="sayYes()">yes :)</button>
+      <button class="maybe" onclick="sayMaybe()">maybe / let's talk</button>
+      <button class="no" id="noBtn" onclick="sayNo()">no</button>
+    </div>
+
+    <div class="msg" id="msg"></div>
+    <div class="tiny">Lucas (Harvey) Kirazci</div>
+  </div>
+
+  <script>
+    const msg = document.getElementById('msg');
+    const noBtn = document.getElementById('noBtn');
+    let dodges = 0;
+
+    function makeHeart(x, y) {
+      const el = document.createElement('div');
+      el.className = 'floating-heart';
+      el.textContent = ['💖', '💕', '💗', '💞'][Math.floor(Math.random() * 4)];
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 2400);
+    }
+
+    function burstHearts() {
+      for (let i = 0; i < 20; i++) {
+        const x = window.innerWidth * (0.25 + Math.random() * 0.5);
+        const y = window.innerHeight * (0.45 + Math.random() * 0.2);
+        setTimeout(() => makeHeart(x, y), i * 60);
+      }
+    }
+
+    function sayYes() {
+      msg.textContent = 'Excellent. I expected nothing less. 💖';
+      burstHearts();
+    }
+
+    function sayMaybe() {
+      msg.textContent = 'Good. A proper conversation is an acceptable next step.';
+    }
+
+    function sayNo() {
+      msg.textContent = 'If not, call me. We can work something out.';
+    }
+
+    noBtn.addEventListener('mouseenter', () => {
+      if (window.innerWidth < 700 || dodges >= 4) return;
+      dodges++;
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    });
+  </script>
+</body>
+</html>
