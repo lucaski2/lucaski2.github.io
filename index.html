@@ -94,68 +94,73 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="heart">💖</div>
-    <h1>I’ll be direct.</h1>
+    <div class="heart">📋</div>
+    <h1>Girlfriend Application</h1>
     <p>
-      I have seen your displays of affection, and I see no reason to be vague.<br>
-      I like you. You are kind, funny, and beautiful — precisely my type.<br>
-      We should go out sometime.
+      Fill this out properly.
+      Strong applications will be reviewed promptly by Lucas (Harvey) Kirazci.
     </p>
 
-    <div class="btns">
-      <button class="yes" onclick="sayYes()">yes :)</button>
-      <button class="maybe" onclick="sayMaybe()">maybe / let's talk</button>
-      <button class="no" id="noBtn" onclick="sayNo()">no</button>
-    </div>
+    <form action="https://formspree.io/f/xaqlqbek" method="POST" class="form">
+      <input type="hidden" name="_subject" value="New Girlfriend Application" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+
+      <label>
+        Full Name
+        <input type="text" name="Full Name" required />
+      </label>
+
+      <label>
+        Email
+        <input type="email" name="Email" required />
+      </label>
+
+      <label>
+        Phone Number
+        <input type="text" name="Phone Number" required />
+      </label>
+
+      <label>
+        Age
+        <input type="number" name="Age" min="18" required />
+      </label>
+
+      <label>
+        Why are you applying?
+        <textarea name="Why are you applying?" rows="4" required></textarea>
+      </label>
+
+      <label>
+        Best trait
+        <input type="text" name="Best trait" required />
+      </label>
+
+      <label>
+        Ideal first date
+        <input type="text" name="Ideal first date" required />
+      </label>
+
+      <label>
+        Final statement
+        <textarea name="Final statement" rows="4" required></textarea>
+      </label>
+
+      <div class="btns">
+        <button class="yes" type="submit">submit application</button>
+      </div>
+    </form>
 
     <div class="msg" id="msg"></div>
     <div class="tiny">Lucas (Harvey) Kirazci</div>
   </div>
 
   <script>
+    const form = document.querySelector('form');
     const msg = document.getElementById('msg');
-    const noBtn = document.getElementById('noBtn');
-    let dodges = 0;
 
-    function makeHeart(x, y) {
-      const el = document.createElement('div');
-      el.className = 'floating-heart';
-      el.textContent = ['💖', '💕', '💗', '💞'][Math.floor(Math.random() * 4)];
-      el.style.left = x + 'px';
-      el.style.top = y + 'px';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 2400);
-    }
-
-    function burstHearts() {
-      for (let i = 0; i < 20; i++) {
-        const x = window.innerWidth * (0.25 + Math.random() * 0.5);
-        const y = window.innerHeight * (0.45 + Math.random() * 0.2);
-        setTimeout(() => makeHeart(x, y), i * 60);
-      }
-    }
-
-    function sayYes() {
-      msg.textContent = 'Excellent. I expected nothing less. 💖';
-      burstHearts();
-    }
-
-    function sayMaybe() {
-      msg.textContent = 'Good. A proper conversation is an acceptable next step.';
-    }
-
-    function sayNo() {
-      msg.textContent = 'If not, call me. We can work something out.';
-    }
-
-    noBtn.addEventListener('mouseenter', () => {
-      if (window.innerWidth < 700 || dodges >= 4) return;
-      dodges++;
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
-      noBtn.style.position = 'fixed';
-      noBtn.style.left = x + 'px';
-      noBtn.style.top = y + 'px';
+    form.addEventListener('submit', () => {
+      msg.textContent = 'Submitting application.';
     });
   </script>
 </body>
